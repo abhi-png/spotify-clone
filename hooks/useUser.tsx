@@ -1,5 +1,6 @@
 import { useEffect, useState, createContext, useContext } from 'react';
 import { useUser as useSupaUser, useSessionContext, User } from '@supabase/auth-helpers-react';
+
 import { UserDetails, Subscription } from '@/types';
 
 type UserContextType = {
@@ -19,7 +20,7 @@ export interface Props {
 }
 
 export const MyUserContextProvider = (props: Props) => {
-   const { session, isLoading: isLoadingUser, supabaseClient: supabase } = useSessionContext();
+   const {session, isLoading: isLoadingUser, supabaseClient: supabase} = useSessionContext();
    const user = useSupaUser();
    const accessToken = session?.access_token ?? null;
    const [isLoadingData, setIsloadingData] = useState(false);
@@ -37,7 +38,6 @@ export const MyUserContextProvider = (props: Props) => {
    useEffect(() => {
       if (user && !isLoadingData && !userDetails && !subscription) {
          setIsloadingData(true);
-         
          Promise.allSettled([getUserDetails(), getSubscription()]).then(
             (results) => {
                const userDetailsPromise = results[0];
