@@ -1,2 +1,4 @@
-- Supabase : Database
+- Next.js - 14 , React.js - 18
+- Database, Authentication : Supabase
+- Payment Gateway : Stripe
 - 
